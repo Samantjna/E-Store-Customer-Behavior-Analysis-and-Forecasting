@@ -31,5 +31,6 @@ df.loc[np.random.choice(df.index, size=int(len(df) * 0.6), replace=False), 'Rati
 # print(df.head())
 # df.to_csv('Adidas US Sales Datasets_final.csv', index=False)
 
+#galutinis df su gender ir rating
 df = pd.read_csv('Adidas US Sales Datasets_final.csv')
 print(df.head())
