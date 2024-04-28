@@ -62,10 +62,10 @@ print(f'Vyriausias klientas: {vyriausias_klientas}')
 amzius_nuo_50 = df[(df['Age'] > 50)].shape[0]
 print(f'Klientai nuo 50 m.: {amzius_nuo_50}')
 
-Age_groups = ['Customers under 25 years of age', 'Customers aged 25 to 50', 'Customers aged 50+']
-Quantity = [amzius_iki_25, klientai_nuo_25_iki_50, amzius_nuo_50]
+age_groups = ['Customers under 25 years of age', 'Customers aged 25 to 50', 'Customers aged 50+']
+quantity = [amzius_iki_25, klientai_nuo_25_iki_50, amzius_nuo_50]
 
-df = pd.DataFrame({'Age groups': Age_groups, 'Quantity': Quantity})
+df = pd.DataFrame({'Age groups': age_groups, 'Quantity': quantity})
 
 plt.figure(figsize=(10, 8))
 sns.barplot(data=df, x='Age groups', y='Quantity', hue='Age groups', palette='husl')
