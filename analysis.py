@@ -46,7 +46,7 @@ plt.legend(title='Lytis')
 plt.show()
 
 
-#klientu amziaus kategorijos
+#klientu amziaus grupes
 jauniausias_klientas = df['Age'].min()
 print(f'Jauniausias klientas: {jauniausias_klientas}')
 
