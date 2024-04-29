@@ -33,15 +33,9 @@ df[['Purchase Date','Purchase Year','Purchase Month']]
 pirkimai_pagal_lyti = df.groupby('Gender')['Total Purchase Amount'].mean()
 # print(pirkimai_pagal_lyti)
 
-# mokejimo_metodas_pagal_lyti = df.groupby('Gender')['Payment Method'].value_counts()
-# print(mokejimo_metodas_pagal_lyti)
 
-# sns.countplot(data=df, order=mokejimo_metodas_pagal_lyti.index)
-# plt.legend()
-# plt.show()
-
-#hue - atskiria papildomus duomenu aspektus
-sns.countplot(data=df, x='Payment Method', hue='Gender', order=df['Payment Method'].value_counts().index, palette='husl')
+#mokejimo metodai pagal lyti
+sns.countplot(data=df, x='Payment Method', hue='Gender', order=df['Payment Method'].value_counts().index, palette='husl')       #hue - atskiria papildomus duomenu aspektus
 plt.legend(title='Lytis')
 plt.show()
 
