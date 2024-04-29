@@ -34,12 +34,12 @@ df[['Purchase Date','Purchase Year','Purchase Month']]
 pirkimai_pagal_lyti = df.groupby('Gender')['Total Purchase Amount'].mean()
 # print(pirkimai_pagal_lyti)
 
-# mokejimo_metodas_pagal_lyti = df.groupby('Gender')['Payment Method'].value_counts()
+mokejimo_metodas_pagal_lyti = df.groupby('Gender')['Payment Method'].value_counts()
 # print(mokejimo_metodas_pagal_lyti)
 
-# sns.countplot(data=df, order=mokejimo_metodas_pagal_lyti.index)
-# plt.legend()
-# plt.show()
+sns.countplot(data=df, order=mokejimo_metodas_pagal_lyti.index)
+plt.legend()
+plt.show()
 
 
 #klientu amziaus grupes
@@ -78,7 +78,7 @@ plt.xlabel('Age groups', fontsize=13)
 plt.ylabel('Quantity of customers', fontsize=13)
 # plt.xticks(rotation=7)
 plt.title('Number of customers by age group', fontsize=15)
-# plt.show()
+plt.show()
 
 #----------------------------------------------------------------
 
@@ -88,5 +88,5 @@ pirkimai_pagal_lyti_ir_amziu = df.groupby(['Gender', 'Age'])['Total Purchase Amo
 # print(pirkimai_pagal_lyti_ir_amziu)
 
 amziaus_grupe_pagal_pirkima = df.groupby(['klientai_nuo_25_iki_50', 'amzius_nuo_50', 'amzius_iki_25'])['Total Purchase Amount'].mean()
-print(amziaus_grupe_pagal_pirkima)
+# print(amziaus_grupe_pagal_pirkima)
 
