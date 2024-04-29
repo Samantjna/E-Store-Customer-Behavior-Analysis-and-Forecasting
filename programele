@@ -34,13 +34,13 @@ ANALIZE:
    - pardavimai per menesi
    - pardavimai per diena
    - labiausiai perkamos prekiu kategorijos
-   - inventorizacijos kiekio plaiakymas pagal kategorija (?)
+   - inventorizacijos kiekio plaiakymas pagal kategorija (?) +
 
 - Populiariausi atsiskaitymo budai perkant (Samanta)
-   - dazniausias atsiskaitymo budas perkant + (patvarkyt)
-   - kurie klientai gryzta dazniausiai (customer_id, pirkimo kiekis ir datos )
+   - dazniausias atsiskaitymo budas perkant + 
+   - kurie klientai gryzta dazniausiai +
 
-- Klientai kurie atsisake prenumeratos (procentais)
+- Klientai kurie atsisake prenumeratos (procentais) +
 
 
 
