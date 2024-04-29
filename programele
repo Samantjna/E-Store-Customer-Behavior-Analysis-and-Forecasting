@@ -2,42 +2,45 @@ E-Parduotuvės Klientų Elgsenos Analizė ir Prognozavimas
 - Tikslas: Analizuoti e-parduotuvės klientų pirkimo elgseną ir prognozuoti būsimus pirkimus, taip padedant verslui geriau
           suprasti klientų poreikius ir optimizuoti atsargų valdymą.
 - Projekto Reikalavimai:
-- Duomenų Rinkimas:
++ Duomenų Rinkimas:
 Surinkti duomenis apie klientų pirkimus, atsiliepimus iš e-parduotuvės.
 Duomenys turi apimti prekių kategorijas, kainas, pirkimo datas, klientų demografinę informaciją ir kitus relevantiškus rodiklius.
-- Duomenų Valymas ir Paruošimas:
+(+, ?) Duomenų Valymas ir Paruošimas:
 Naudoti pandas duomenų valymui ir struktūrizavimui.
 Atliekama duomenų exploracinė analizė, identifikuojant svarbius modeliavimo rodiklius.
+
 - Klientų Segmentavimas:
 Taikyti k-means klasterizaciją ar kitas segmentavimo metodikas, kad būtų suskirstyti klientai į grupes pagal pirkimo įpročius ir pageidavimus.
 Įvertinti segmentų efektyvumą ir pritaikymą marketingo strategijose.
+
 - Pirkimo Prognozavimas:
 Sukurti klasifikacijos arba regresijos modelius, naudojant neuroninius tinklus arba atsitiktinių miškų algoritmus, prognozuoti klientų pirkimo tikimybę.
 Apmokyti modelius, naudojant surinktus duomenis, ir atlikti modelio validaciją.
+
 - Rezultatų Vizualizacija ir Pristatymas:
 Sukurti interaktyvias vizualizacijas, kurios parodo klientų pirkimo modelius, segmentus ir prognozes, naudojant Plotly ar Matplotlib.
 Paruošti išsamų pristatymą su analizės rezultatais, iššūkiais, įžvalgomis.
+
 - Dokumentacija ir Kodas:
 Visas kodas turi būti rašomas aiškiai ir suprantamai, su komentarais ir sukeltas į Github.
 - Pateikti visą projekto dokumentaciją, apimančią technologijas, metodikas ir modelio analizės įvertinimą.
 - Technologijos: Python, pandas, scikit-learn, TensorFlow, Plotly/Dash, Matplotlib
 
 
-MINTYS:
+ANALIZE:
+- pikimai pagal lyti +
+- klientu amziaus grupes +
+- Pardavimu pagal prekiu kategorijas analize (Rasa)
+   - pardavimai per menesi
+   - pardavimai per diena
+   - labiausiai perkamos prekiu kategorijos
+   - inventorizacijos kiekio plaiakymas pagal kategorija (?) +
 
-pikimai pagal lyti +
-klientu amziaus grupes +
-labiausiai perkamos prekiu kategorijos???
-prekiu didziausias/maziausias pelnas???
-klientu lojalumas, ar grizta pirkti? kiek ir pan????
-prekiu grazinimas, kokios kategorijos labiausiai grazinamos? gerai butu suzinot kodel ir pan???
-prekiu sandeliavimas? likuciai????
+- Populiariausi atsiskaitymo budai perkant (Samanta)
+   - dazniausias atsiskaitymo budas perkant + 
+   - kurie klientai gryzta dazniausiai +
 
-Samantos MINTYS ties analize(papildymas Rasai):
-kiek parduodama kiekviena menesi
-kiek parduodama per diena
-labiausiai perkamos prekiu kategorijos(ideali ideja Rasa)
-dazniausias atsiskaitymo budas perkant
+- Klientai kurie atsisake prenumeratos (procentais) +
 
 
 
