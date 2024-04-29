@@ -37,11 +37,6 @@ pirkimai_pagal_lyti = df.groupby('Gender')['Total Purchase Amount'].mean()
 mokejimo_metodas_pagal_lyti = df.groupby('Gender')['Payment Method'].value_counts()
 # print(mokejimo_metodas_pagal_lyti)
 
-sns.countplot(data=df, order=mokejimo_metodas_pagal_lyti.index)
-plt.legend()
-plt.show()
-
-
 #klientu amziaus grupes
 
 jauniausias_klientas = df['Age'].min()
