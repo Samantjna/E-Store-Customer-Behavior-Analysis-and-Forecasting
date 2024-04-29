@@ -11,7 +11,7 @@ pd.set_option('display.max_rows', None)
 # print(df.describe())
 
 #Tikriname eiluciu skaiciu
-print(len(df))
+# print(len(df))
 
 # -Tikriname NaN reiksmes
 # print(df.isnull().sum())
@@ -45,7 +45,6 @@ jauniausias_klientas = df['Age'].min()
 vyriausias_klientas = df['Age'].max()
 # print(f'Vyriausias klientas: {vyriausias_klientas}')
 
-
 df['amzius_iki_25'] = df[df['Age'] < 25].shape[0]
 # print(f'Klientai jaunesni nei 25 m.: {amzius_iki_25}')
 
@@ -55,33 +54,87 @@ df['klientai_nuo_25_iki_50'] = df[(df['Age'] > 25) & (df['Age'] < 50)].shape[0]
 df['amzius_nuo_50'] = df[(df['Age'] > 50)].shape[0]
 # print(f'Klientai nuo 50 m.: {amzius_nuo_50}')
 
+
 #----------------------------------------------------------------
 amzius_iki_25 = df[df['Age'] < 25].shape[0]
-
 klientai_nuo_25_iki_50 = df[(df['Age'] > 25) & (df['Age'] < 50)].shape[0]
-
 amzius_nuo_50 = df[(df['Age'] > 50)].shape[0]
 
-age_groups = ['Customers under 25 years of age', 'Customers aged 25 to 50', 'Customers aged 50+']
+
+age_groups = ['Klientai iki 25 m.', 'Klientai nuo 25 m. iki 50 m.', 'Klientai nuo 50m.']
 quantity = [amzius_iki_25, klientai_nuo_25_iki_50, amzius_nuo_50]
 
 features = pd.DataFrame({'Age groups': age_groups, 'Quantity': quantity})
 
 plt.figure(figsize=(10, 8))
-sns.barplot(data=features, x='Age groups', y='Quantity', hue='Age groups', palette='husl')
-plt.xlabel('Age groups', fontsize=13)
-plt.ylabel('Quantity of customers', fontsize=13)
-# plt.xticks(rotation=7)
-plt.title('Number of customers by age group', fontsize=15)
-plt.show()
+sns.barplot(data=features, x='Age groups', y='Quantity', palette='husl')
+plt.xlabel('Amžiaus grupės', fontsize=13)
+plt.ylabel('Klientų kiekis', fontsize=13)
+plt.title('Klientų kiekis pagal amžiaus grupę', fontsize=15)
+# plt.show()
 
 #----------------------------------------------------------------
 
-# pagal klientu amziu ir lyti, bendros sumos isleistu pinigu pasiskirstymas
+# pagal klientu lyti, bendros sumos isleistu pinigu pasiskirstymas
 
-pirkimai_pagal_lyti_ir_amziu = df.groupby(['Gender', 'Age'])['Total Purchase Amount'].sum()
-# print(pirkimai_pagal_lyti_ir_amziu)
+pirkimai_pagal_lyti = df.groupby(['Gender'])['Total Purchase Amount'].sum()    ##### pasitart kaaip
+# print(pirkimai_pagal_lyti)
 
-amziaus_grupe_pagal_pirkima = df.groupby(['klientai_nuo_25_iki_50', 'amzius_nuo_50', 'amzius_iki_25'])['Total Purchase Amount'].mean()
-# print(amziaus_grupe_pagal_pirkima)
+#___________________________________________________________________________________________________
 
+##PARDAVIMAI PAGAL PREKIU KATEGORIJAS
+
+pirmas_uzsakymo_data = df['Purchase Date'].min()
+# print(f'Pirmas uzsakymas atliktas: {pirmas_uzsakymo_data}')
+paskutinis_uzsakymas = df['Purchase Date'].max()
+# print(f'Paskutinio uzsakymo data: {paskutinis_uzsakymas}')
+prekiu_kategorijos = df['Product Category'].unique()
+# print(prekiu_kategorijos)
+
+
+##pardavimai pagal kategorijas per metus
+df['Year'] = df['Purchase Date'].dt.year
+
+prekiu_pardavimai_metams = df.groupby(['Year', 'Product Category'])['Total Purchase Amount'].sum()
+# print(f'Prekiu pardavimai metams pagal kategorijas ir bendra pirkimu suma:\n{prekiu_pardavimai_metams}')
+
+plt.figure(figsize=(12, 6))
+sns.barplot(data=df, x='Year', y='Total Purchase Amount', hue='Product Category', palette='husl')
+plt.title('Pardavimai per metus')
+plt.xlabel('Metai')
+plt.ylabel('Pardavimų suma')
+plt.legend()
+# plt.show()
+
+
+##pardavimai pagal kategorijas per menesi
+df['Month'] = df['Purchase Date'].dt.month
+
+prekiu_pardavimai_menesiui = df.groupby(['Month', 'Product Category'])['Total Purchase Amount'].sum()
+# print(f'Prekiu pardavimai per menesi pagal kategorijas ir bendra pirkimu suma:\n{prekiu_pardavimai_menesiui}')
+
+plt.figure(figsize=(12, 6))
+sns.barplot(data=df, x='Month', y='Total Purchase Amount', hue='Product Category', palette='husl')
+plt.title('Pardavimai per mėnesį')
+plt.xlabel('Mėnesis')
+plt.ylabel('Pardavimų suma')
+plt.legend()
+# plt.show()
+
+
+##labiausiai perkamos prekiu kategorijos
+kategoriju_pirkimu_suma = df.groupby('Product Category')['Total Purchase Amount'].sum()
+
+
+##kategorijos pagal pirkimu suma mazejimo tvarka
+perkamiausios_prekiu_kategorijos = kategoriju_pirkimu_suma.sort_values(ascending=False)
+# print(f'Prekiu kategoriju perkamumas: \n{perkamiausios_prekiu_kategorijos}')
+
+
+##1eB vienas eksabajtas. Tai yra duomenų saugojimo matavimo vienetas, kuris lygus 10^18 baitų. Todėl skaičiai per kablelį..
+plt.figure(figsize=(12, 6))
+sns.barplot(x=perkamiausios_prekiu_kategorijos.values, y=perkamiausios_prekiu_kategorijos.index, palette='husl')
+plt.title('Labiausiai perkamų prekių kategorijos')
+plt.xlabel('Bendra pirkimų suma')
+plt.ylabel('Kategorija')
+plt.show()
