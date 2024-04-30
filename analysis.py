@@ -19,7 +19,7 @@ pd.set_option('display.max_rows', None)
 # -sutvarkome returns skilti, pasauliname NaN reiksmes
 df['Returns'] = df['Returns'].fillna(0).astype(int)
 
-# -convertuojame pirkimo data to datetime
+# -konvertuojame pirkimo data to datetime
 df['Purchase Date'] = pd.to_datetime(df['Purchase Date'])
 df['Purchase Year'] = df['Purchase Date'].dt.year
 df['Purchase Month'] = df['Purchase Date'].dt.month_name()
