@@ -45,7 +45,7 @@ X = np.reshape(X, (X.shape[0], X.shape[1], 1))
 # Padalijama į mokymo ir testavimo rinkinius
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
 
-# LSTM modelis
+# modelis
 model = Sequential([
     GRU(units=133, return_sequences=True, input_shape=(X_train.shape[1], 1)),
     GRU(units=133),

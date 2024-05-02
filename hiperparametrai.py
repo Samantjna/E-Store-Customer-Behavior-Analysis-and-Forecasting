@@ -58,7 +58,7 @@ param = {
 }
 
 # Inicijuojama KerasRegressor
-keras_model = KerasRegressor(build_fn=create_model, lstm_units=50, verbose=0)
+keras_model = KerasRegressor(build_fn=create_model, lstm_units=133, verbose=1)
 
 # Atsitiktinė paieška
 # cv5 kartus mokomas, n iter atsitiktiniu deriniu bandymai
