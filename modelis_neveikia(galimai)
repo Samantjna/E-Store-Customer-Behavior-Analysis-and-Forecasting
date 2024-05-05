@@ -1,0 +1,78 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.metrics import mean_squared_error, r2_score
+from sklearn.preprocessing import MinMaxScaler
+from sklearn.model_selection import train_test_split
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import GRU, Dense
+
+# Load the CSV file and read the data
+df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv', nrows=1000)
+
+# Select relevant features
+selected_features = ['Customer ID', 'Product Category', 'Product Price', 'Quantity', 'Purchase Date']
+df_selected = df[selected_features]
+
+# Convert 'Purchase Date' to datetime format
+df_selected['Purchase Date'] = pd.to_datetime(df_selected['Purchase Date'])
+df_selected['Year'] = df_selected['Purchase Date'].dt.year
+df_selected['Month'] = df_selected['Purchase Date'].dt.month
+df_selected['Day'] = df_selected['Purchase Date'].dt.day
+df_selected['Hour'] = df_selected['Purchase Date'].dt.hour
+df_selected['Minute'] = df_selected['Purchase Date'].dt.minute
+
+# Group purchases by year, month, and customer ID
+df_grouped = df_selected.groupby(['Year', 'Month', 'Customer ID']).agg({'Quantity': 'sum'}).reset_index()
+
+# Scale the quantity values
+scaler = MinMaxScaler(feature_range=(0, 1))
+df_grouped['Scaled Quantity'] = scaler.fit_transform(df_grouped['Quantity'].values.reshape(-1, 1))
+
+# Prepare training and testing datasets
+look_back = 12
+X, Y = [], []
+for i in range(look_back, len(df_grouped)):
+    X.append(df_grouped.iloc[i - look_back:i]['Scaled Quantity'].values)
+    Y.append(df_grouped.iloc[i]['Scaled Quantity'])
+
+X, Y = np.array(X), np.array(Y)
+X = np.reshape(X, (X.shape[0], X.shape[1], 1))
+
+X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.3, random_state=42)
+
+# Build the GRU model
+model = Sequential([
+    GRU(units=64, return_sequences=True, input_shape=(X_train.shape[1], 1)),
+    GRU(units=64),
+    Dense(1)  # Linear activation for regression
+])
+model.compile(optimizer='adam', loss='mean_squared_error')
+
+# Train the model
+model.fit(X_train, Y_train, epochs=10, batch_size=16, validation_data=(X_test, Y_test), verbose=1)
+
+# Make predictions
+predictions = model.predict(X_test)
+
+# Inverse transform predictions and actual values
+predictions = scaler.inverse_transform(predictions)
+Y_test = scaler.inverse_transform(Y_test.reshape(-1, 1))
+
+# Calculate RMSE
+rmse = np.sqrt(mean_squared_error(Y_test, predictions))
+print("RMSE:", rmse)
+
+# Evaluate using R2 score
+r2 = r2_score(Y_test, predictions)
+print("R2:", r2)
+
+# Plot actual vs. predicted quantities
+plt.figure(figsize=(10, 6))
+plt.plot(Y_test, label='Actual Quantity', color='blue')
+plt.plot(predictions, label='Predicted Quantity', color='orange', linestyle='dashed')
+plt.xlabel('Sample Index')
+plt.ylabel('Quantity')
+plt.title('Actual vs. Predicted Purchase Quantities')
+plt.legend()
+plt.show()
