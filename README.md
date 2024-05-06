@@ -112,6 +112,25 @@ Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gal
 
 ## 3. Modelio kūrimas
 
+<b> LSTM modelis "Faktinės ir prognozuotos pirkimų reikšmės" </b>
+
+| Metrika | Rezultatas |
+|----|-------|
+|MSE: |2.001457929611206
+|R2: |-0.00015582927564650184
+|MAE: |1.2036666989294689
+![newplot(4)](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/a33a94ba-5a4d-4e27-8972-24b4730bda9c)
+
+
+<b> GRU modelis "'Faktinės ir prognozuotos pirkimų kiekis'" </b>
+
+| Metrika | Rezultatas |
+|----|-------|
+|RMSE: |16.602761296256666
+|MAE: |14.055126190185547
+|R2: |-0.6207522070600988
+![image](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/2b6e57c6-37d4-4a77-9dad-c9a7101702e5)
+
 
 
 
