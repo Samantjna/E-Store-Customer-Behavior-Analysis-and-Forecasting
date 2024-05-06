@@ -1,10 +1,10 @@
-# E-Parduotuvės Klientų Elgsenos Analizė ir Prognozavimas
+# E-Parduotuvės klientų elgsenos analizė ir prognozavimas
 
 ### Projekto autorės:
 - Samanta Čečkauskaitė
 - Rasa Dzenkauskaitė
 ## Įvadas:
-Analizuoti e-parduotuvės klientų pirkimo elgseną ir prognozuoti būsimus pirkimus, taip padedant verslui geriau suprasti klientų poreikius ir optimizuoti atsargų valdymą.
+Analizuoti e-parduotuvės klientų pirkimo elgseną ir prognozuoti būsimus pirkimų kiekius, taip padedant verslui geriau suprasti klientų poreikius.
 
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
