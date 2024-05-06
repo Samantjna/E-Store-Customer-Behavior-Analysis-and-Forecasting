@@ -1,6 +1,4 @@
-import dash
-from dash import dcc, html
-import plotly.graph_objs as go
+import plotly.express as px
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder
@@ -13,7 +11,7 @@ from tensorflow.keras.layers import Dense, Dropout
 from sklearn.preprocessing import StandardScaler
 
 # Duomenų įkėlimas
-df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv')
+df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv', nrows=50000)
 
 # Duomenų paruošimas
 df['Purchase Date'] = df['Purchase Date'].apply(lambda x: datetime.strptime(x, '%Y-%m-%d %H:%M:%S').timestamp())
@@ -58,44 +56,24 @@ mse = mean_squared_error(y_test, y_pred)
 r2 = r2_score(y_test, y_pred)
 mae = mean_absolute_error(y_test, y_pred)
 
-# Dash programėlė
-app = dash.Dash(__name__)
+# fig = px.scatter(df, x=y_test, y=y_pred, title='Faktinis skaičius vs. prognozuojamas skaičius')
+# fig.update_traces(marker=dict(line=dict(width=1, color='rgba(0, 255, 0, 0)')), selector=dict(mode='markers'))
+# fig.show()
 
-app.layout = html.Div([
-    dcc.Graph(
-        id='scatter-plot',
-        figure={
-            'data': [
-                go.Scatter(
-                    x=list(range(len(y_test))),
-                    y=y_test,
-                    mode='markers',
-                    name='Tikrosios reikšmės',
-                    marker=dict(color='blue')
-                ),
-                go.Scatter(
-                    x=list(range(len(y_pred))),
-                    y=y_pred.flatten(),
-                    mode='markers',
-                    name='Prognozuojamos reikšmės',
-                    marker=dict(color='red')
-                )
-            ],
-            'layout': go.Layout(
-                title='Tikrosios ir prognozuojamos reikšmės',
-                xaxis=dict(title='Indeksas'),
-                yaxis=dict(title='Kiekis'),
-                legend=dict(x=0, y=1.0),
-                hovermode='closest'
-            )
-        }
-    ),
-    html.Div([
-        html.H4(f'R2 rezultatas: {r2}'),
-        html.H4(f'MSE rezultatas: {mse}'),
-        html.H4(f'MAE rezultatas: {mae}')
-    ])
-])
-#po paleidimo reikia sustabdyti, nes leidžia procesą iš naujo, kad gautų vis naujus duomenis
-if __name__ == '__main__':
-    app.run_server()
+
+
+import plotly.express as px
+
+# Sukurkite DataFrame su tikraisiais ir prognozuojamais kiekiais bei jų atitinkamomis datos reikšmėmis
+results_df = pd.DataFrame({
+    'Date': X_test[:, -1],  # Čia prielaidos, kad paskutinis stulpelis yra datos
+    'Actual': y_test,
+    'Predicted': y_pred.flatten()
+})
+
+# Konvertuokite laiko žymas atgal į datą
+results_df['Date'] = pd.to_datetime(results_df['Date'], unit='s')
+
+# Vizualizacija su Line plot
+fig = px.line(results_df, x='Date', y=['Actual', 'Predicted'], title='Faktinės ir Prognozuojamos Reikšmės per Laiką')
+fig.show()
