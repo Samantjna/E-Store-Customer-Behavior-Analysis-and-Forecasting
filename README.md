@@ -39,6 +39,8 @@ pd.set_option('display.max_rows', None)
 #--Sutvarkome "Returns" skiltį, pašaliname NaN reikšmes
 df['Returns'] = df['Returns'].fillna(0).astype(int)
 
+# --Pašaliname 'customer age' stulpelį, nes jis identiškas 'age' stulpeliui--
+df = df.drop('Customer Age', axis=1)
 
 #--Konvertuojame pirkimo datą į dataframe
 df['Purchase Date'] = pd.to_datetime(df['Purchase Date'])
