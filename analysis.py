@@ -85,9 +85,9 @@ pirkimai_pagal_lyti = df.groupby(['Gender'])['Total Purchase Amount'].sum()    #
 ##PARDAVIMAI PAGAL PREKIU KATEGORIJAS
 
 pirmas_uzsakymo_data = df['Purchase Date'].min()
-# print(f'Pirmas uzsakymas atliktas: {pirmas_uzsakymo_data}')
+print(f'Pirmas uzsakymas atliktas: {pirmas_uzsakymo_data}')
 paskutinis_uzsakymas = df['Purchase Date'].max()
-# print(f'Paskutinio uzsakymo data: {paskutinis_uzsakymas}')
+print(f'Paskutinio uzsakymo data: {paskutinis_uzsakymas}')
 prekiu_kategorijos = df['Product Category'].unique()
 # print(prekiu_kategorijos)
 
@@ -138,3 +138,39 @@ plt.title('Labiausiai perkamų prekių kategorijos')
 plt.xlabel('Bendra pirkimų suma')
 plt.ylabel('Kategorija')
 plt.show()
+
+
+#_______________________________________________________
+
+#---Analizuojame populiariausius atsiskaitymo budus---
+
+atsiskaitymo_budas = (df['Payment Method'].value_counts()
+                                       .plot(kind='pie', y='popurliariausias_atsiskaitymo_budas', autopct='%1.0f%%',
+                                             colors=['pink', 'skyblue', 'gold', 'orchid']))
+plt.title('Atsiskaitymo būdų analizė')
+plt.show()
+
+#Atsiskaitymo budu suskaiciavimas nuo didziausio iki maziausio
+populiariausias_atsiskaitymo_budas = df['Payment Method'].value_counts()
+print(populiariausias_atsiskaitymo_budas)
+
+#---inventorizacijos kiekio plaiakymas pagal kategorija---
+prekiu_kiekis_pagal_kategorija = df.groupby('Product Category')['Quantity'].sum()
+print(prekiu_kiekis_pagal_kategorija)
+
+#---kurie klientai gryzta dazniausiai---
+
+top_10_klientai_gryzta_dazniausiai = df['Customer Name'].value_counts().head(10)
+print(top_10_klientai_gryzta_dazniausiai)
+
+#---Kiek klientu renkasi prenumerata---
+
+klientu_prenumerata = (df['Churn'].value_counts().plot(kind='pie', y='klientu_prenumerata', autopct='%1.0f%%',
+                                             colors=['pink', 'skyblue', 'gold', 'orchid']))
+plt.title('Klientų prenumeratų analizė')
+plt.legend(loc='upper right', bbox_to_anchor=(1, 1), labels=["0-Atsisakė", "1-Sutiko"])
+plt.show()
+
+klientu_prenumerata = df['Churn'].value_counts()
+print(klientu_prenumerata)
+
