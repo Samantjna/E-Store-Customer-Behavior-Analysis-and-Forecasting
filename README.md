@@ -10,7 +10,7 @@ Analizuoti e-parduotuvės klientų pirkimo elgseną ir prognozuoti būsimus pirk
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ### Technologijos:
-Python ✦ TensorFlow/Keras ✦ Plotly/Dash ✦ scikit-learn ✦ Pandas
+Python ✦ TensorFlow/Keras ✦ Plotly ✦ Seaborn ✦ Scikit-Learn ✦ Pandas ✦ Sklearn ✦ Numpy ✦ Matplotlib ✦
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
