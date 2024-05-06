@@ -13,13 +13,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # Įkeliami duomenis
-df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv')
-
+df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv', nrows=5000)
 
 
 # Duomenų paruošimas
 df['Purchase Date'] = pd.to_datetime(df['Purchase Date'])
 df['Purchase Date'] = df['Purchase Date'].apply(lambda x: x.timestamp())
+
+
 X = df[['Purchase Date', 'Product Category', 'Product Price']]
 y = df['Quantity']
 
@@ -68,7 +69,7 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weig
 
 
 # Apmokymas kviečiant ankstyvajį sustabdymą
-history = model.fit(X_train_reshaped, y_train, epochs=32, batch_size=49, validation_split=0.2, callbacks=[early_stopping])
+history = model.fit(X_train_reshaped, y_train, epochs=46, batch_size=46, validation_split=0.2, callbacks=[early_stopping])
 
 
 # Prognozės
@@ -124,15 +125,24 @@ results_df = pd.DataFrame({
 results_df['Date'] = pd.to_datetime(results_df['Date']).dt.strftime('%Y-%m')
 
 
+results_df['Date'] = pd.to_datetime(results_df['Date'])
+
+# Rūšiuojame pagal datą
+results_df = results_df.sort_values(by='Date')
+
+# Pasirenkame datos intervalą
+start_date = pd.to_datetime('2022-06')
+end_date = pd.to_datetime('2024-09')
+
 # Matplotlib
 plt.figure(figsize=(15, 6))
-plt.plot(results_df['Date'], results_df['Actual'], label='Actual')
-plt.plot(results_df['Date'], results_df['Predicted'], label='Predicted')
+plt.plot(results_df['Date'], results_df['Actual'], label='Faktinis kiekis')
+plt.plot(results_df['Date'], results_df['Predicted'], label='Prognozė')
 plt.title('Faktinės ir prognozuotos pirkimų reikšmės')
 plt.xlabel('Data')
 plt.ylabel('Kiekis')
 plt.legend()
 plt.xticks(rotation=90)
-plt.xlim('2023-06', '2024-06') # Pasirenkame datos intervalą
+plt.xlim(start_date, end_date)
 plt.tight_layout()
 plt.show()
