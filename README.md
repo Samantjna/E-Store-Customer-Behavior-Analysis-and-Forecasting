@@ -14,7 +14,7 @@ Python ✦ TensorFlow/Keras ✦ Plotly ✦ Seaborn ✦ Scikit-Learn ✦ Pandas �
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-### Darbo etapai:
+## Darbo etapai:
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ## 1.Duomenų valymas ir paruošimas naudojimui:
