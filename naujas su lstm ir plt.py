@@ -120,7 +120,7 @@ results_df = pd.DataFrame({
 })
 
 
-# Konvertuojama datą į tekstą
+# Konvertuojama data į tekstą
 results_df['Date'] = pd.to_datetime(results_df['Date']).dt.strftime('%Y-%m')
 
 
