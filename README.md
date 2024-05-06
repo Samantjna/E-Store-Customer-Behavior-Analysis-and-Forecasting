@@ -15,16 +15,34 @@ Python ✦ TensorFlow/Keras ✦ Plotly/Dash ✦ scikit-learn ✦ Pandas
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 ### Darbo etapai:
-1.
-2.
-3.
-4.
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-## 1.Duomenų valymas ir paruošimas naudojimui
+## 1.Duomenų valymas ir paruošimas naudojimui:
 
+```javascript
 
-## Duomenų analizė pagal klientus:
+#Duomenu valymas ir paruosimas naudojimui
+df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv')
+pd.set_option('display.max_columns', None)
+pd.set_option('display.max_rows', None)
+# print(df.describe())
+
+#Tikriname eiluciu skaiciu
+# print(len(df))
+
+# -Tikriname NaN reiksmes
+# print(df.isnull().sum())
+
+# -sutvarkome returns skilti, pasauliname NaN reiksmes
+df['Returns'] = df['Returns'].fillna(0).astype(int)
+
+# -konvertuojame pirkimo data to datetime
+df['Purchase Date'] = pd.to_datetime(df['Purchase Date'])
+df['Purchase Year'] = df['Purchase Date'].dt.year
+df['Purchase Month'] = df['Purchase Date'].dt.month_name()
+```
+
+## 2. Duomenų analizė pagal klientus:
 
 Pirmiausia analaziuojame kurios lyties klientai perka daugiausiai ir matome, kad abi lytis išleidžia panašią sumą pinigų.
 
@@ -97,7 +115,7 @@ Apžiūrime pardavimus per mėnesį ir metus.
      height="360" />
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-## 2. Klientų segmentaciją su KMeans
+## 3. Klientų segmentacija su KMeans
 
 Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gali būti grupuojami pagal išlaidų elgseną ir dažnumą, kas gali būti vertinga rinkos segmentavimo analizei. Iš to matome, kad yra trys klientų grupės atsižvelgiant į išleistą bendrą pinigų kiekį ir išleistą pinigų kiekį per pirkimą.
 
@@ -110,7 +128,7 @@ Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gal
 
 ![image](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/36a241dc-1434-4ff0-9f61-3e71e2eb0f85)
 
-## 3. Modelio kūrimas
+## 4. Modelio kūrimas
 
 <b> LSTM modelis "Faktinės ir prognozuotos pirkimų reikšmės" </b>
 
