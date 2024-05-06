@@ -121,16 +121,17 @@ Apžiūrime pardavimus per mėnesį ir metus.
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ## 3. Klientų segmentacija su KMeans
 
-Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gali būti grupuojami pagal išlaidų elgseną ir dažnumą, kas gali būti vertinga rinkos segmentavimo analizei. Iš to matome, kad yra trys klientų grupės atsižvelgiant į išleistą bendrą pinigų kiekį ir išleistą pinigų kiekį per pirkimą.
+Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gali būti grupuojami pagal išlaidų elgseną ir dažnumą, kas gali būti vertinga rinkos segmentavimo analizei. Iš to matome, kad yra trys klientų grupės atsižvelgiant į išleistą bendrą pinigų kiekį ir išleistą pinigų kiekį per pirkimą. Geltona grupė - išleidusi bendrai mažai pinigų ir mažai išleidžią per pirkimą. Violetinė grupė - išleidusi bendrai daug pinigų ir per pirkimą išleidžia šiek tiek daugiau už geltoną grupę žmonių. Mėlyna grupė - išleidusi bendrai mažai pinigų, bet per pirkimą išleidžia daug. Bendrai atsižvelgiant, E parduotuvei reikėtų sutelkti dėmesį į violetinės grupės žmones, nes jie ne vien yra sugrįžtantys pirkėjai, bet ir išleidžiantys nemažą sumą per pirkimą, kas padaro juos didžiausio pelno šaltiniu.
 
 | Vertinimas. | Klasteriai | Gaunamas rezultatas 
 |----|-------|------|
-|K-Means silhouette score: |k= 3| 0.34
+|K-Means silhouette score: |k= 3| 0.34 
 |K-Means silhouette score: |k= 6| 0.29
 |K-Means silhouette score: |k= 9| 0.26
 |Best silhouette score for k = 3
 
-![image](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/36a241dc-1434-4ff0-9f61-3e71e2eb0f85)
+![image](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/97bba6ff-48e0-446b-b022-152cf63fef49)
+
 
 ## 4. Modelio kūrimas
 
