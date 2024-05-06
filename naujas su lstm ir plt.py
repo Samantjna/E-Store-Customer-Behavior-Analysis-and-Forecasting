@@ -11,9 +11,11 @@ from tensorflow.keras.layers import LSTM, Dense, Dropout
 import plotly.express as px
 import numpy as np
 import matplotlib.pyplot as plt
+import plotly.graph_objects as go
+
 
 # Įkeliami duomenis
-df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv', nrows=5000)
+df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv')
 
 
 # Duomenų paruošimas
@@ -113,7 +115,7 @@ future_X = scaler.transform(trans.transform(future_data))
 future_pred = model.predict(future_X.reshape(future_X.shape[0], 1, future_X.shape[1]))
 
 
-# DF su faktiniais duomenimis ir prognozėmis
+# DF su faktiniais ir prognozės duomenimis
 results_df = pd.DataFrame({
     'Date': np.concatenate((pd.to_datetime(df['Purchase Date'], unit='s')[y_test.index], extended_future_dates)),
     'Actual': np.concatenate((y_test, [None]*len(extended_future_dates))),
@@ -134,15 +136,39 @@ results_df = results_df.sort_values(by='Date')
 start_date = pd.to_datetime('2022-06')
 end_date = pd.to_datetime('2024-09')
 
-# Matplotlib
-plt.figure(figsize=(15, 6))
-plt.plot(results_df['Date'], results_df['Actual'], label='Faktinis kiekis')
-plt.plot(results_df['Date'], results_df['Predicted'], label='Prognozė')
-plt.title('Faktinės ir prognozuotos pirkimų reikšmės')
-plt.xlabel('Data')
-plt.ylabel('Kiekis')
-plt.legend()
-plt.xticks(rotation=90)
-plt.xlim(start_date, end_date)
-plt.tight_layout()
-plt.show()
+# # Matplotlib
+# plt.figure(figsize=(15, 6))
+# plt.plot(results_df['Date'], results_df['Actual'], label='Faktinis kiekis')
+# plt.plot(results_df['Date'], results_df['Predicted'], label='Prognozė')
+# plt.title('Faktinės ir prognozuotos pirkimų reikšmės')
+# plt.xlabel('Data')
+# plt.ylabel('Kiekis')
+# plt.legend()
+# plt.xticks(rotation=90)
+# plt.xlim(start_date, end_date)
+# plt.tight_layout()
+# plt.show()
+
+
+# Plotly
+# Duomenys pagal pasirinktą intervalą
+filtered_df = results_df[(results_df['Date'] >= start_date) & (results_df['Date'] <= end_date)]
+
+fig = go.Figure()
+
+# Faktiniai duomenys
+fig.add_trace(go.Scatter(x=filtered_df['Date'], y=filtered_df['Actual'],
+                         mode='lines+markers',
+                         name='Faktinis kiekis'))
+
+# Prognozės duomenys
+fig.add_trace(go.Scatter(x=filtered_df['Date'], y=filtered_df['Predicted'],
+                         mode='lines+markers',
+                         name='Prognozė'))
+
+# Pavadinimas ir ašys
+fig.update_layout(title='Faktinės ir prognozuotos pirkimų reikšmės',
+                  xaxis_title='Data',
+                  yaxis_title='Kiekis',
+                  legend_title='Legenda')
+fig.show()
