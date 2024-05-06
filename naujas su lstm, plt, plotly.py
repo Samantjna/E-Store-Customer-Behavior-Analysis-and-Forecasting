@@ -42,7 +42,7 @@ X_scaled = scaler.fit_transform(X_encoded)
 
 
 # Padalinami duomenys į mokymo ir testavimo rinkinius
-X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.33, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.3, random_state=42)
 
 
 # Pertvarkomi duomenys į trimačius masyvus
@@ -52,9 +52,9 @@ X_test_reshaped = X_test.reshape((X_test.shape[0], 1, X_test.shape[1]))
 
 # Modelis
 model = Sequential([
-    LSTM(64, return_sequences=True, input_shape=(X_train_reshaped.shape[1], X_train_reshaped.shape[2])),
+    LSTM(72, return_sequences=True, input_shape=(X_train_reshaped.shape[1], X_train_reshaped.shape[2])),
     Dropout(0.5),
-    LSTM(32),
+    LSTM(36),
     Dropout(0.5),
     Dense(1)
 ])
@@ -71,7 +71,7 @@ early_stopping = EarlyStopping(monitor='val_loss', patience=5, restore_best_weig
 
 
 # Apmokymas kviečiant ankstyvajį sustabdymą
-history = model.fit(X_train_reshaped, y_train, epochs=46, batch_size=46, validation_split=0.2, callbacks=[early_stopping])
+history = model.fit(X_train_reshaped, y_train, epochs=92, batch_size=53, validation_split=0.2, callbacks=[early_stopping])
 
 
 # Prognozės
@@ -172,3 +172,6 @@ fig.update_layout(title='Faktinės ir prognozuotos pirkimų reikšmės',
                   yaxis_title='Kiekis',
                   legend_title='Legenda')
 fig.show()
+
+
+#Geriausias rezultatas: -0.000234 naudojant {'batch_size': 53, 'epochs': 92, 'model__optimizer': 'rmsprop', 'model__units': 72}
