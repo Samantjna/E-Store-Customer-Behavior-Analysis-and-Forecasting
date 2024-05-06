@@ -21,22 +21,26 @@ Python ✦ TensorFlow/Keras ✦ Plotly/Dash ✦ scikit-learn ✦ Pandas
 
 ```javascript
 
-#Duomenu valymas ir paruosimas naudojimui
+#--Nuskaitome duomenis
 df = pd.read_csv('ecommerce_customer_data_custom_ratios.csv')
 pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 # print(df.describe())
 
-#Tikriname eiluciu skaiciu
+
+#--Tikriname eilučių skaičių
 # print(len(df))
 
-# -Tikriname NaN reiksmes
+
+#--Tikriname NaN reikšmes
 # print(df.isnull().sum())
 
-# -sutvarkome returns skilti, pasauliname NaN reiksmes
+
+#--Sutvarkome "Returns" skiltį, pašaliname NaN reikšmes
 df['Returns'] = df['Returns'].fillna(0).astype(int)
 
-# -konvertuojame pirkimo data to datetime
+
+#--Konvertuojame pirkimo datą į dataframe
 df['Purchase Date'] = pd.to_datetime(df['Purchase Date'])
 df['Purchase Year'] = df['Purchase Date'].dt.year
 df['Purchase Month'] = df['Purchase Date'].dt.month_name()
@@ -44,14 +48,14 @@ df['Purchase Month'] = df['Purchase Date'].dt.month_name()
 
 ## 2. Duomenų analizė pagal klientus:
 
-Pirmiausia analaziuojame kurios lyties klientai perka daugiausiai ir matome, kad abi lytis išleidžia panašią sumą pinigų.
+Analaziuojame kurios lyties klientai perka daugiausiai ir matome, kad abi lytis išleidžia panašią sumą pinigų.
 
 | Nr |	Lytis |	Suma |
 |-------|------|--------------|
 |1  |Moteris	|342462421
 |2	|Vyras	|338880262
 
-Tada analizuojame klientų kiekį pagal amžiaus grupes ir matome, kad didžiausią mūsų klientų kiekį sudaro nuo 25 m. iki 50 metų grupės, o mažiausią kiekį sudaro klientai iki 25 metų.
+Analizuojame klientų kiekį pagal amžiaus grupes ir matome, kad didžiausią mūsų klientų kiekį sudaro nuo 25 m. iki 50 metų grupės, o mažiausią kiekį sudaro klientai iki 25 metų.
 Tai mums leidžią žinoti, kurio amžiaus žmonės apsiperka daugiausiai.
 
 <img src="https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/047d2e07-10ef-4f3b-9cdb-0bb2fcf66d49" 
