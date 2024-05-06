@@ -68,7 +68,7 @@ Tai mums leidžią žinoti, kurio amžiaus žmonės apsiperka daugiausiai.
 |Klientai nuo 25 m. iki 50 m.|112988
 |Klientai nuo 50 m.|94081
 
-Analizuojame klientų pasirinkimą į prenumeratą/naujienlaiškį ir matome, kad tik 20% visų klientų renkasi gauti naujienlaiškį. Iš to galime spręsti, kad E parduotuvei nenaudinga yra šita paslauga.
+Analizuojame klientų pasirinkimą į prenumeratą/naujienlaiškį ir matome, kad tik 20% visų klientų renkasi gauti naujienlaiškį. Iš to galime spręsti, kad E parduotuvei paslauga nenaudinga.
 
 <img src="https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/55907cdc-5cb3-43bf-81d5-2b47ce6172df"
      width="480" 
@@ -76,10 +76,10 @@ Analizuojame klientų pasirinkimą į prenumeratą/naujienlaiškį ir matome, ka
 
 | Naujienlaiškis |	Statistika |
 |-------|------|
-|Renkasi   |200126
-|Nesirenka |49874
+| Nesirenka |200126
+|Renkasi  |49874
 
-Klientų atsiskaitymo būdų analizė. Matome, kad klientai labiau linkė atsiskaityti Kreditine kortele 40% ir PayPal 30%. Siūlome reklamuoti, kad E parduotuvėje galima atsiskaityti šitais būdais.
+Klientų atsiskaitymo būdų analizė. Matome, kad klientai labiau linkę atsiskaityti Kreditine kortele 40% ir PayPal 30%. Siūlome reklamuoti, kad E parduotuvėje galima atsiskaityti šitais būdais.
 
 <img src="https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/bb35c427-e60a-4e71-bc3b-cbd65127a23a"
      width="480" 
