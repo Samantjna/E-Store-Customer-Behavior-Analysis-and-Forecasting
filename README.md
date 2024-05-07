@@ -1,10 +1,10 @@
-# E-Parduotuvės Klientų Elgsenos Analizė ir Prognozavimas
+# E-Parduotuvės klientų elgsenos analizė ir prognozavimas
 
 ### Projekto autorės:
 - Samanta Čečkauskaitė
 - Rasa Dzenkauskaitė
 ## Įvadas:
-Analizuoti e-parduotuvės klientų pirkimo elgseną ir prognozuoti būsimus pirkimus, taip padedant verslui geriau suprasti klientų poreikius ir optimizuoti atsargų valdymą.
+Analizuoti e-parduotuvės klientų pirkimo elgseną ir prognozuoti būsimus pirkimų kiekius, taip padedant verslui geriau suprasti klientų poreikius.
 
 
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -39,6 +39,8 @@ pd.set_option('display.max_rows', None)
 #--Sutvarkome "Returns" skiltį, pašaliname NaN reikšmes
 df['Returns'] = df['Returns'].fillna(0).astype(int)
 
+# --Pašaliname 'customer age' stulpelį, nes jis identiškas 'age' stulpeliui--
+df = df.drop('Customer Age', axis=1)
 
 #--Konvertuojame pirkimo datą į dataframe
 df['Purchase Date'] = pd.to_datetime(df['Purchase Date'])
@@ -68,7 +70,7 @@ Tai mums leidžią žinoti, kurio amžiaus žmonės apsiperka daugiausiai.
 |Klientai nuo 25 m. iki 50 m.|112988
 |Klientai nuo 50 m.|94081
 
-Analizuojame klientų pasirinkimą į prenumeratą/naujienlaiškį ir matome, kad tik 20% visų klientų renkasi gauti naujienlaiškį. Iš to galime spręsti, kad E parduotuvei nenaudinga yra šita paslauga.
+Analizuojame klientų pasirinkimą į prenumeratą/naujienlaiškį ir matome, kad tik 20% visų klientų renkasi gauti naujienlaiškį. Iš to galime spręsti, kad E parduotuvei paslauga nenaudinga.
 
 <img src="https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/55907cdc-5cb3-43bf-81d5-2b47ce6172df"
      width="480" 
@@ -76,10 +78,10 @@ Analizuojame klientų pasirinkimą į prenumeratą/naujienlaiškį ir matome, ka
 
 | Naujienlaiškis |	Statistika |
 |-------|------|
-|Renkasi   |200126
-|Nesirenka |49874
+| Nesirenka |200126
+|Renkasi  |49874
 
-Klientų atsiskaitymo būdų analizė. Matome, kad klientai labiau linkė atsiskaityti Kreditine kortele 40% ir PayPal 30%. Siūlome reklamuoti, kad E parduotuvėje galima atsiskaityti šitais būdais.
+Klientų atsiskaitymo būdų analizė. Matome, kad klientai labiau linkę atsiskaityti Kreditine kortele 40% ir PayPal 30%. Siūlome reklamuoti, kad E parduotuvėje galima atsiskaityti šitais būdais.
 
 <img src="https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/bb35c427-e60a-4e71-bc3b-cbd65127a23a"
      width="480" 
@@ -121,16 +123,17 @@ Apžiūrime pardavimus per mėnesį ir metus.
 ### - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 ## 3. Klientų segmentacija su KMeans
 
-Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gali būti grupuojami pagal išlaidų elgseną ir dažnumą, kas gali būti vertinga rinkos segmentavimo analizei. Iš to matome, kad yra trys klientų grupės atsižvelgiant į išleistą bendrą pinigų kiekį ir išleistą pinigų kiekį per pirkimą.
+Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gali būti grupuojami pagal išlaidų elgseną ir dažnumą, kas gali būti vertinga rinkos segmentavimo analizei. Iš to matome, kad yra trys klientų grupės atsižvelgiant į išleistą bendrą pinigų kiekį ir išleistą pinigų kiekį per pirkimą. Geltona grupė - išleidusi bendrai mažai pinigų ir mažai išleidžią per pirkimą. Violetinė grupė - išleidusi bendrai daug pinigų ir per pirkimą išleidžia šiek tiek daugiau už geltoną grupę žmonių. Mėlyna grupė - išleidusi bendrai mažai pinigų, bet per pirkimą išleidžia daug. Bendrai atsižvelgiant, E parduotuvei reikėtų sutelkti dėmesį į violetinės grupės žmones, nes jie ne vien yra sugrįžtantys pirkėjai, bet ir išleidžiantys nemažą sumą per pirkimą, kas padaro juos didžiausio pelno šaltiniu.
 
 | Vertinimas. | Klasteriai | Gaunamas rezultatas 
 |----|-------|------|
-|K-Means silhouette score: |k= 3| 0.34
+|K-Means silhouette score: |k= 3| 0.34 
 |K-Means silhouette score: |k= 6| 0.29
 |K-Means silhouette score: |k= 9| 0.26
 |Best silhouette score for k = 3
 
-![image](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/36a241dc-1434-4ff0-9f61-3e71e2eb0f85)
+![image](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/97bba6ff-48e0-446b-b022-152cf63fef49)
+
 
 ## 4. Modelio kūrimas
 
@@ -144,14 +147,6 @@ Skirtingi klasteriai pagal spalvų juostą dešinėje atspindi kaip klientai gal
 ![newplot(4)](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/a33a94ba-5a4d-4e27-8972-24b4730bda9c)
 
 
-<b> GRU modelis "'Faktinės ir prognozuotos pirkimų kiekis'" </b>
-
-| Metrika | Rezultatas |
-|----|-------|
-|RMSE: |16.602761296256666
-|MAE: |14.055126190185547
-|R2: |-0.6207522070600988
-![image](https://github.com/Samantjna/E-Store-Customer-Behavior-Analysis-and-Forecasting/assets/163418549/2b6e57c6-37d4-4a77-9dad-c9a7101702e5)
 
 
 
